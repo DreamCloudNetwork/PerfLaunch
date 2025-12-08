@@ -1,0 +1,128 @@
+## 自定义配置文件格式示例 (.ccf)
+## 规则：
+## 1. 注释以 "##" 开始
+## 2. 段名用方括号 [SECTION_NAME]
+## 3. 键值对用 "key = value" 格式
+## 4. 字符串值用双引号包围
+## 5. 数字直接书写
+## 6. 布尔值用 yes/no
+## 7. 列表用方括号 [item1, item2]
+## 8. 字典用花括号 {key1: value1, key2: value2}
+## 9. 路径用 path: 前缀
+## 10. 表达式用 expr: 前缀
+
+[application]
+name = "PerfLaunch"
+version = "1.0.0"
+description = "一个高性能程序启动器"
+debug = yes
+
+[paths]
+base_path = path:/opt/perflaunch
+config_path = path:/etc/perflaunch
+logs_path = path:/var/log/perflaunch
+temp_path = path:/tmp/perflaunch
+
+[database]
+type = "postgresql"
+host = "127.0.0.1"
+port = 5432
+name = "perflaunch_db"
+user = "perflaunch_user"
+password = "db_password_here"
+charset = "utf8mb4"
+pool_size = 20
+create_if_not_exists = yes
+
+cache_enabled = yes
+cache_ttl = 3600
+backup_enabled = no
+backup_time = "02:00"
+
+[server]
+host = "0.0.0.0"
+port = 8080
+workers = 8
+max_requests = 1000
+timeout = 30.5
+keepalive = yes
+
+ssl_enabled = no
+ssl_cert = path:/etc/ssl/certs/perflaunch.crt
+ssl_key = path:/etc/ssl/private/perflaunch.key
+
+[monitoring]
+enabled = yes
+metrics_port = 9090
+health_check_path = "/health"
+metrics_path = "/metrics"
+
+alert_channels = ["email", "webhook", "slack"]
+webhooks = ["https://api.example.com/webhook"]
+
+[features]
+auto_restart = yes
+log_rotation = yes
+memory_limit = 1024
+cpu_limit = 80
+enabled_features = ["logs", "metrics", "healthcheck", "profiler"]
+
+disable_features = {debug_mode: no, maintenance: no}
+
+[limits]
+max_processes = 100
+max_memory_mb = 8192
+max_cpu_percent = 90
+max_log_size_mb = 500
+max_concurrent_connections = 1000
+rate_limit = 1000.5
+
+[scripts]
+startup = expr:start_application()
+shutdown = expr:graceful_shutdown()
+restart = expr:restart_with_config_reload()
+health_check = expr:check_system_health()
+backup = expr:perform_backup_routine()
+
+[email]
+smtp_host = "smtp.gmail.com"
+smtp_port = 587
+smtp_user = "notifications@example.com"
+smtp_password = "app_password_here"
+from_address = "noreply@perflaunch.com"
+to_addresses = ["admin@example.com", "ops@team.com"]
+
+[logging]
+level = "info"
+format = "json"
+file_pattern = "perflaunch-%Y%m%d.log"
+rotation = "daily"
+max_files = 30
+
+console_output = yes
+file_output = yes
+syslog_enabled = no
+
+[security]
+secret_key = "your-secret-key-here"
+allowed_ips = ["127.0.0.1", "10.0.0.0/8", "192.168.0.0/16"]
+banned_ips = []
+enable_cors = yes
+cors_origins = ["http://localhost:3000"]
+rate_limit_window = 60
+rate_limit_requests = 100
+
+[environment]
+timezone = "Asia/Shanghai"
+locale = "zh_CN.UTF-8"
+language = "chinese"
+encoding = "utf-8"
+
+## 开发环境特定配置
+[development]
+debug = yes
+verbose = yes
+profiling = yes
+cache_enabled = no
+
+dev_tools = {hot_reload: yes, auto_restart: yes, debug_panel: yes}
