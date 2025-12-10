@@ -1,0 +1,13 @@
+[general]
+## 一般设置
+name = "CCF"
+
+## 触发键
+trigger_keys = [keyboard.Key.alt_l, keyboard.Key.alt_r]
+
+## 应用
+apps = {Microsoft Edge:microsoft-edge-stable}
+
+[version]
+## 不要编辑此处！！！
+version = 1

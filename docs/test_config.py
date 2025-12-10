@@ -4,7 +4,7 @@
 测试自定义配置文件解析器
 """
 
-from custom_config import CustomConfigParser, load_config
+from config import CustomConfigParser, load_config
 
 
 def test_parser():

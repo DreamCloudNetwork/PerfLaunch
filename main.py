@@ -2,13 +2,20 @@ import time
 import os
 from pynput import keyboard
 from select_window import MaterialSelectWindow
+from config import CustomConfigParser
 import threading
 import tray_icon
 
 # items = ["选项一", "选项二", "选项三", "选项四", "选项五"]
 
 apps = {"Microsoft Edge":"microsoft-edge-stable"}
-trigger_keys = [keyboard.Key.alt_l, keyboard.Key.alt_r]
+trigger_keys = []
+parser = CustomConfigParser()
+config = parser.parse_file('config.ccf')
+for key in parser.get("general","trigger_keys"):
+    trigger_keys.append(eval(key))
+for app in parser.get("general","apps"):
+    apps[app] = parser.get("general","apps")[app]
 
 current_press_keys = []
 showing_gui = False

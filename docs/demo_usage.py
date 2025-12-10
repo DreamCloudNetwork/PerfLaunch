@@ -5,7 +5,7 @@
 展示主要功能而不包含复杂的测试
 """
 
-from custom_config import CustomConfigParser, load_config
+from config import CustomConfigParser, load_config
 
 def main():
     print("🎯 自定义配置文件格式 (.ccf) 演示")
